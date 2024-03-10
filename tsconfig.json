@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es2015",
+        "outDir": "dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+    },
+    "rules": {
+        "typedef": [
+            true,
+            "call-signature",
+            "parameter",
+            "property-declaration",
+            "variable-declaration",
+            "member-variable-declaration",
+            "object-destructuring"
+        ]
+    },
+    "include": [
+        "src/**/*.ts",
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}

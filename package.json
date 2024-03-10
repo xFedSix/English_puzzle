@@ -1,0 +1,55 @@
+{
+    "name": "RSS-Puzzle",
+    "version": "1.0.0",
+    "description": "",
+    "main": "webpack.base.config.js",
+    "scripts": {
+        "test": "echo \"No tests to run\"",
+        "build": "webpack",
+        "dev": "webpack serve --env develop",
+        "lint": "eslint . --ext .ts",
+        "format": "prettier --write \"src/**/*.{ts,css}\"",
+        "ci:format": "prettier --check \"src/**/*.{ts,css}\"",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "src/**/*.{ts,css}": [
+            "npm run format",
+            "npm run ci:format",
+            "npm run lint"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "pre-push": "validate-branch-name"
+        }
+    },
+    "type": "commonjs",
+    "devDependencies": {
+        "@commitlint/config-conventional": "^19.0.3",
+        "@types/node-sass": "^4.11.7",
+        "@typescript-eslint/eslint-plugin": "^7.1.1",
+        "@typescript-eslint/parser": "^7.1.1",
+        "clean-webpack-plugin": "^4.0.0",
+        "commitlint-plugin-regex-match": "^1.2.4",
+        "eslint": "^8.57.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "file-loader": "^6.2.0",
+        "html-loader": "^5.0.0",
+        "html-webpack-plugin": "^5.6.0",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "mini-css-extract-plugin": "^2.8.1",
+        "typescript": "^5.3.3",
+        "url-loader": "^4.1.1",
+        "validate-branch-name": "^1.3.0",
+        "webpack": "^5.90.3",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.0.2"
+    },
+    "dependencies": {
+        "commitlint": "^19.0.3"
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "rules": {
+        "mustMatch": "^(^(feat|chore|refactor|fix|style|test|perf|docs|build|ci|bug)\\/RSS-PZ-\\d{2}_\\w+$"
+    }
+}
