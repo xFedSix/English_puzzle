@@ -5,7 +5,8 @@
     ],
     "extends": [
         "plugin:prettier/recommended",
-        "prettier"
+        "prettier",
+        "import/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 2021,
@@ -20,5 +21,15 @@
         "no-debugger": "off",
         "no-console": 0,
         "class-methods-use-this": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": true,
+            "node": {
+                "extensions": [
+                    ".ts"
+                ]
+            }
+        }
     }
 }

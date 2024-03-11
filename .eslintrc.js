@@ -3,7 +3,7 @@ module.exports = {
         browser: true,
         es2021: true,
     },
-    extends: ['eslint:recommended', 'airbnb-base', 'plugin:@typescript-eslint/recommended'],
+    extends: ['eslint:recommended', 'airbnb-base', 'plugin:@typescript-eslint/recommended', 'prettier'],
     overrides: [],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -16,5 +16,13 @@ module.exports = {
         'import/extensions': 'off',
         'import/prefer-default-export': 'off',
         '@typescript-eslint/no-explicit-any': 'error',
+    },
+    settings: {
+        'import/resolver': {
+            typescript: true,
+            node: {
+                extensions: ['.ts'],
+            },
+        },
     },
 };

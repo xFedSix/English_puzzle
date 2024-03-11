@@ -1,0 +1,18 @@
+@import '../src/app/components/loginForm/login';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    scroll-behavior: smooth;
+    max-width: 1360px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

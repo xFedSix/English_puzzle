@@ -40,8 +40,13 @@ module.exports = ({ develop }) => ({
                 type: 'asset/resource',
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                test: /\.css$/i,
+                use: [develop ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
         ],
     },

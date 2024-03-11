@@ -1,0 +1,29 @@
+.user-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 15rem;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    width: 19em;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    label {
+        font-size: medium;
+        font-weight: bold;
+    }
+    input {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        cursor: pointer;
+        width: 4rem;
+        &:hover {
+            background-color: #88bbf1;
+        }
+    }
+}
