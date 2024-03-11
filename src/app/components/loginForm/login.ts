@@ -1,18 +1,18 @@
-type UserForm = {
+export type UserForm = {
     firstName: string;
     lastName: string;
 };
 
 export class UserNameEntryPage {
-    private formState: UserForm;
+    public formState: UserForm;
 
-    private form: HTMLFormElement;
+    public form: HTMLFormElement;
 
-    private firstNameInput: HTMLInputElement;
+    public firstNameInput: HTMLInputElement;
 
-    private lastNameInput: HTMLInputElement;
+    public lastNameInput: HTMLInputElement;
 
-    private submitButton: HTMLButtonElement;
+    public submitButton: HTMLButtonElement;
 
     constructor() {
         this.formState = {
@@ -22,27 +22,28 @@ export class UserNameEntryPage {
 
         this.form = document.createElement('form');
         this.form.classList.add('user-form');
-        this.firstNameInput = document.createElement('input');
-        this.lastNameInput = document.createElement('input');
+        this.firstNameInput = this.createInput('text', 'firstName', 'First Name:');
+        this.lastNameInput = this.createInput('text', 'lastName', 'Last Name:');
         this.submitButton = document.createElement('button');
+        this.initializeForm();
+    }
+
+    private createInput(type: string, name: string, labelText: string): HTMLInputElement {
+        const input = document.createElement('input');
+        input.type = type;
+        input.name = name;
+        input.required = true;
+
+        const label = document.createElement('label');
+        label.textContent = labelText;
+
+        this.form.appendChild(label);
+        this.form.appendChild(input);
+
+        return input;
     }
 
     public initializeForm(): void {
-        this.firstNameInput.type = 'text';
-        this.firstNameInput.name = 'firstName';
-        this.firstNameInput.required = true;
-        const firstNameLabel = document.createElement('label');
-        firstNameLabel.textContent = 'First Name:';
-        this.form.appendChild(firstNameLabel);
-        this.form.appendChild(this.firstNameInput);
-        this.lastNameInput.type = 'text';
-        this.lastNameInput.name = 'lastName';
-        this.lastNameInput.required = true;
-        const lastNameLabel = document.createElement('label');
-        lastNameLabel.textContent = 'Last Name:';
-        this.form.appendChild(lastNameLabel);
-        this.form.appendChild(this.lastNameInput);
-
         this.submitButton.type = 'submit';
         this.submitButton.textContent = 'Login';
         this.form.appendChild(this.submitButton);
