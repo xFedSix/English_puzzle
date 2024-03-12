@@ -1,7 +1,8 @@
 import { clearErrors } from './clearErrors';
+import { removeForm } from './clearForm';
 import { UserForm } from './login';
 import { validateForm } from './loginFormValidation';
-import { storeUser } from './setUserToLocallStore';
+import { storeUser } from './setUserToLocalStore';
 
 export function formSubmitHandler(
     form: HTMLFormElement,
@@ -33,6 +34,7 @@ export function formSubmitHandler(
             userForm.firstName = firstNameInput.value;
             userForm.lastName = lastNameInput.value;
             storeUser(userForm.firstName, userForm.lastName);
+            removeForm(form);
             return;
         }
         if (
@@ -44,6 +46,7 @@ export function formSubmitHandler(
         ) {
             return;
         }
+
         firstNameError.textContent = validationMessage.firstName;
         firstNameInput.parentNode.insertBefore(firstNameError, firstNameInput.nextSibling);
 
