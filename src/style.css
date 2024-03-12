@@ -60,6 +60,14 @@
 .wrapper button:hover {
   background-color: rgb(109, 99, 87);
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .wrapper .content {
   display: flex;
   justify-content: center;
@@ -70,6 +78,16 @@
   width: 25rem;
   text-align: center;
 }
+.wrapper .content .greeting {
+  color: rgb(35, 78, 78);
+  font-weight: 800;
+  margin-top: 3rem;
+  animation-name: fadeIn;
+  animation-duration: 2.5s;
+}
+.wrapper .content .greeting span {
+  font-size: 1.5rem;
+}
 .wrapper .content h1 {
   color: rgb(110, 99, 84);
   font-weight: 700;
@@ -79,11 +97,12 @@
 .wrapper .content p {
   color: rgb(126, 114, 101);
   font-weight: 400;
-  margin-bottom: 1rem;
   font-style: oblique;
+  margin-bottom: 1rem;
 }
 .wrapper .content p span {
   font-weight: 700;
+  margin: 1rem 0 1rem 0;
 }
 
 * {

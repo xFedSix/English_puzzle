@@ -1,5 +1,6 @@
 import { LogoutButton } from './logoutBtn';
 import { StartPageElements } from './createStartPageElements';
+import { getPersonalizedGreeting } from './userGreeting';
 
 export class StartPage {
     wrapper: HTMLElement;
@@ -35,11 +36,13 @@ export class StartPage {
         contentWrapper.className = 'content';
 
         this.h1 = StartPageElements.createH1(contentWrapper, 'ENGLISH PUZZLE GAME');
+        this.h1.id = 'game-title';
         this.p = StartPageElements.createP(
             contentWrapper,
             'Playing the game you will learn English, as well as find out who painted famous paintings and when.<br>Click on words.<br>Words can be drag and drops.<br><span>Click on the button below to begin.</span>'
         );
         this.startButton = StartPageElements.createButton(contentWrapper, 'Start');
+        getPersonalizedGreeting();
         this.addLogoutButton();
     }
 
