@@ -1,0 +1,54 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    header {
+        display: flex;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        justify-content: flex-end;
+        padding: 20px;
+    }
+    button {
+        cursor: pointer;
+        background-color: rgb(168, 154, 136);
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 20px;
+        &:hover {
+            background-color: rgb(109, 99, 87);
+        }
+    }
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 16rem;
+        width: 25rem;
+        text-align: center;
+        h1 {
+            color: rgb(110, 99, 84);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        p {
+            color: rgb(126, 114, 101);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-style: oblique;
+            span {
+                font-weight: 700;
+            }
+        }
+    }
+}

@@ -7,7 +7,7 @@ export function checkLoginStatus() {
     const lastName = localStorage.getItem('lastName');
 
     if (firstName && lastName) {
-        const startPage = new StartPage(document.body);
+        const startPage = new StartPage();
         startPage.render(document.body);
     } else {
         const userNameEntryPage = new UserNameEntryPage();

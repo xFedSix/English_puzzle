@@ -31,12 +31,59 @@
   background-color: #88bbf1;
 }
 
-header button {
-  cursor: pointer;
-  width: 4rem;
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-header button:hover {
-  background-color: #88bbf1;
+.wrapper header {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  justify-content: flex-end;
+  padding: 20px;
+}
+.wrapper button {
+  cursor: pointer;
+  background-color: rgb(168, 154, 136);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+}
+.wrapper button:hover {
+  background-color: rgb(109, 99, 87);
+}
+.wrapper .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 16rem;
+  width: 25rem;
+  text-align: center;
+}
+.wrapper .content h1 {
+  color: rgb(110, 99, 84);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.wrapper .content p {
+  color: rgb(126, 114, 101);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  font-style: oblique;
+}
+.wrapper .content p span {
+  font-weight: 700;
 }
 
 * {
@@ -48,11 +95,20 @@ header button:hover {
 html,
 body {
   scroll-behavior: smooth;
-  max-width: 1360px;
+  max-width: 1960px;
   margin: 0 auto;
   width: 100%;
+  height: 100%;
   background-color: #f9f9f9;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.wrapper {
+  background-image: url("../src/images/start_page_background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=style.css.map */
