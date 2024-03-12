@@ -1,6 +1,7 @@
 import { clearErrors } from './clearErrors';
 import { UserForm } from './login';
 import { validateForm } from './loginFormValidation';
+import { storeUser } from './setUserToLocallStore';
 
 export function formSubmitHandler(
     form: HTMLFormElement,
@@ -31,7 +32,7 @@ export function formSubmitHandler(
             const userForm = { ...formState };
             userForm.firstName = firstNameInput.value;
             userForm.lastName = lastNameInput.value;
-            alert('Form submitted successfully!');
+            storeUser(userForm.firstName, userForm.lastName);
             return;
         }
         if (
