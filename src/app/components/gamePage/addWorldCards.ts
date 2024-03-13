@@ -29,8 +29,13 @@ export function addWorldCards() {
                 setTimeout(() => {
                     wordCard.classList.remove('moving');
                 }, 500);
-                sourceBlock.removeChild(wordCard);
-                resultBlock.appendChild(wordCard);
+                if (wordCard.parentElement === sourceBlock) {
+                    sourceBlock.removeChild(wordCard);
+                    resultBlock.appendChild(wordCard);
+                } else {
+                    resultBlock.removeChild(wordCard);
+                    sourceBlock.appendChild(wordCard);
+                }
             });
             sourceBlock.appendChild(wordCard);
             const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
