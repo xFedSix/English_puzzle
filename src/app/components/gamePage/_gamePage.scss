@@ -1,0 +1,34 @@
+#game-page__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+#result-block {
+    display: flex;
+    align-items: flex-start;
+    border: 2px solid;
+    height: 25rem;
+}
+
+#source-block {
+    display: flex;
+    justify-content: flex-start;
+    border: 2px solid;
+}
+.word-card {
+    border: 1px solid #333;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.word-card:hover {
+    background-color: #ddd;
+}
+.word-card.moving {
+    opacity: 0.5;
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+}

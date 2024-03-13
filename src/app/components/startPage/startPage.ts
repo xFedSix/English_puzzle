@@ -2,7 +2,7 @@ import { LogoutButton } from './logoutBtn';
 import { StartPageElements } from './createStartPageElements';
 import { getPersonalizedGreeting } from './userGreeting';
 import { startBtnHandler } from './startBtnHandler';
-import { GamePage } from '../gamePage/gamePage';
+import { GamePageElements } from '../gamePage/gamePageElements';
 
 export class StartPage {
     wrapper: HTMLElement;
@@ -17,7 +17,7 @@ export class StartPage {
 
     LogoutButton: LogoutButton | undefined;
 
-    gamePage: GamePage;
+    gamePage: GamePageElements;
 
     constructor() {
         this.wrapper = document.createElement('div');
@@ -25,7 +25,7 @@ export class StartPage {
         this.h1 = document.createElement('h1');
         this.p = document.createElement('p');
         this.startButton = document.createElement('button');
-        this.gamePage = new GamePage();
+        this.gamePage = new GamePageElements();
     }
 
     addLogoutButton() {

@@ -1,9 +1,9 @@
-import { GamePage } from '../gamePage/gamePage';
+import { GamePageElements } from '../gamePage/gamePageElements';
 import { StartPage } from './startPage';
 
-export function startBtnHandler(startButton: HTMLElement, startPage: StartPage, gamePage: GamePage) {
+export function startBtnHandler(startButton: HTMLElement, startPage: StartPage, gamePageElements: GamePageElements) {
     startButton.addEventListener('click', () => {
         startPage.remove();
-        gamePage.render(document.body);
+        gamePageElements.render(document.body);
     });
 }

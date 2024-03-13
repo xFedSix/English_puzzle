@@ -6,7 +6,14 @@
         "strict": true,
         "esModuleInterop": true,
         "noImplicitAny": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
         "strictNullChecks": true,
+    },
+    "paths": {
+        "@worldCollectionData/*": [
+            "src/worldCollectionData/*"
+        ]
     },
     "rules": {
         "typedef": [
@@ -22,6 +29,7 @@
     "include": [
         "src/**/*.ts",
         "src/**/*.css",
+        "src/**/*.json"
     ],
     "exclude": [
         "dist",
