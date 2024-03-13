@@ -24,7 +24,6 @@ export function addWorldCards() {
             const wordCard = document.createElement('div');
             wordCard.classList.add('word-card');
             wordCard.textContent = word;
-
             wordCard.addEventListener('click', () => {
                 wordCard.classList.add('moving');
                 setTimeout(() => {
@@ -33,13 +32,13 @@ export function addWorldCards() {
                 sourceBlock.removeChild(wordCard);
                 resultBlock.appendChild(wordCard);
             });
-
             sourceBlock.appendChild(wordCard);
-            const width = sourceBlock.scrollWidth;
-            const height = sourceBlock.scrollHeight;
-            resultBlock.style.minWidth = `${width}px`;
-            sourceBlock.style.minWidth = `${width}px`;
-            sourceBlock.style.minHeight = `${height}px`;
+            const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+            const width = sourceBlock.scrollWidth / baseFontSize;
+            const height = sourceBlock.scrollHeight / baseFontSize;
+            resultBlock.style.minWidth = `${width}rem`;
+            sourceBlock.style.minWidth = `${width}rem`;
+            sourceBlock.style.minHeight = `${height}rem`;
         });
     }
 }
