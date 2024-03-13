@@ -3,6 +3,7 @@ import { StartPageElements } from './createStartPageElements';
 import { getPersonalizedGreeting } from './userGreeting';
 import { startBtnHandler } from './startBtnHandler';
 import { GamePageElements } from '../gamePage/gamePageElements';
+import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
 
 export class StartPage {
     wrapper: HTMLElement;
@@ -25,7 +26,7 @@ export class StartPage {
         this.h1 = document.createElement('h1');
         this.p = document.createElement('p');
         this.startButton = document.createElement('button');
-        this.gamePage = new GamePageElements();
+        this.gamePage = new GamePageElements(jsonData);
     }
 
     addLogoutButton() {

@@ -106,21 +106,22 @@
 }
 
 #game-page__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  grid-template-areas: "lineNumber result" "0 source";
+  grid-template-rows: auto 1fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 5px;
 }
 
 #result-block {
-  display: flex;
-  align-items: flex-start;
+  grid-area: result;
   border: 2px solid;
-  height: 25rem;
 }
 
 #source-block {
   display: flex;
   justify-content: flex-start;
+  grid-area: source;
   border: 2px solid;
 }
 
@@ -141,6 +142,12 @@
   opacity: 0.5;
   transform: scale(1.1);
   transition: all 0.5s ease;
+}
+
+#line-number-block {
+  grid-area: lineNumber;
+  justify-items: center;
+  align-items: center;
 }
 
 * {
