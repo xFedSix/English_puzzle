@@ -129,7 +129,8 @@
   background-color: rgb(109, 99, 87);
 }
 #game-page__wrapper #next-btn:disabled {
-  background-color: rgb(109, 99, 87);
+  background-color: #cccccc;
+  color: #ffffff;
 }
 
 #result-block {

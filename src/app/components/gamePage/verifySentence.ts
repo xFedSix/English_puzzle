@@ -1,4 +1,5 @@
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+import { getIndex } from './nextBntHandler';
 
 function getCurrentSentenceFromGrid() {
     const gridElement = document.getElementById('result-block');
@@ -15,10 +16,9 @@ function getCurrentSentenceFromGrid() {
     }
     return sentence;
 }
-
 export function verifySentence() {
+    let targetSentence = jsonData.rounds[0].words[getIndex()].textExample;
     let currentSentence = getCurrentSentenceFromGrid();
-    let targetSentence = jsonData.rounds[0].words[0].textExample;
     currentSentence = currentSentence.toLowerCase();
     targetSentence = targetSentence.toLowerCase();
     currentSentence = currentSentence.trim();
@@ -27,15 +27,3 @@ export function verifySentence() {
     console.log(targetSentence);
     return currentSentence === targetSentence;
 }
-
-export function enableContinueButton() {
-    const continueButton = document.getElementById('next-btn') as HTMLButtonElement;
-    continueButton.disabled = false;
-}
-
-// export function nextButtonHandler() {
-//     if (continueButton) {
-//         continueButton.addEventListener("click", () => {
-//         });
-//     }
-// }

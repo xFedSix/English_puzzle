@@ -23,7 +23,8 @@
             background-color: rgb(109, 99, 87);
         }
         &:disabled {
-            background-color: rgb(109, 99, 87);
+            background-color: #cccccc;
+            color: #ffffff;
         }
     }
 }
