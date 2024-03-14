@@ -107,28 +107,46 @@
 
 #game-page__wrapper {
   display: grid;
-  grid-template-areas: "lineNumber result" "0 source";
+  grid-template-areas: "lineNumber result" "0 source" "1 btn";
   grid-template-rows: auto 1fr;
   grid-row-gap: 20px;
   grid-column-gap: 5px;
 }
+#game-page__wrapper #next-btn {
+  cursor: pointer;
+  grid-area: btn;
+  background-color: rgb(168, 154, 136);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+}
+#game-page__wrapper #next-btn:hover {
+  background-color: rgb(109, 99, 87);
+}
+#game-page__wrapper #next-btn:disabled {
+  background-color: rgb(109, 99, 87);
+}
 
 #result-block {
   grid-area: result;
-  border: 2px solid;
+  border: 2px solid rgb(168, 154, 136);
 }
 
 #source-block {
   display: flex;
   justify-content: flex-start;
   grid-area: source;
-  border: 2px solid;
+  border: 2px solid rgb(168, 154, 136);
 }
 
 .word-card {
-  border: 1px solid #333;
+  border: 1px solid rgb(168, 154, 136);
   background-color: #f0f0f0;
-  color: #333;
   padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;

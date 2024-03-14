@@ -1,3 +1,5 @@
+import { verifySentence, enableContinueButton } from './verifySentence';
+
 export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock: HTMLElement) {
     const wordCard = document.createElement('div');
     wordCard.classList.add('word-card');
@@ -14,6 +16,12 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
             resultBlock.removeChild(wordCard);
             sourceBlock.appendChild(wordCard);
         }
+        const result = verifySentence();
+        console.log(result);
+        if (verifySentence()) {
+            enableContinueButton();
+        }
     });
+
     sourceBlock.appendChild(wordCard);
 }

@@ -11,6 +11,8 @@ export class GamePageElements {
 
     lineNumberBlock: HTMLElement;
 
+    nextButton: HTMLElement;
+
     json: typeof jsonData;
 
     constructor(json: typeof jsonData) {
@@ -18,6 +20,7 @@ export class GamePageElements {
         this.resultBlock = document.createElement('section');
         this.sourceBlock = document.createElement('section');
         this.lineNumberBlock = document.createElement('section');
+        this.nextButton = document.createElement('button');
         this.json = json;
     }
 
@@ -30,6 +33,8 @@ export class GamePageElements {
         this.resultBlock.id = 'result-block';
         this.wrapper.appendChild(this.sourceBlock);
         this.sourceBlock.id = 'source-block';
+        this.wrapper.appendChild(this.nextButton);
+        this.nextButton.id = 'next-btn';
 
         let total = 0;
         for (let i = 0; i < this.json.rounds.length; i += 1) {

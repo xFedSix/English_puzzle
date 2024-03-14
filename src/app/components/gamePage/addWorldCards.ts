@@ -1,5 +1,6 @@
 import { shuffleArray } from './shuffleArray';
 import { addWordCard } from './addWordCard';
+// import { nextButtonHandler} from './verifySentence';
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
 
 export function addWorldCards() {
@@ -11,6 +12,10 @@ export function addWorldCards() {
     const shuffledWords = shuffleArray(words);
     const sourceBlock = document.getElementById('source-block') as HTMLElement;
     const resultBlock = document.getElementById('result-block') as HTMLElement;
+    const nextButton = document.getElementById('next-btn') as HTMLButtonElement;
+
+    nextButton.textContent = 'Continue';
+    nextButton.disabled = true;
 
     if (sourceBlock && resultBlock) {
         shuffledWords.forEach((word) => {
@@ -23,4 +28,5 @@ export function addWorldCards() {
             sourceBlock.style.minHeight = `${height}rem`;
         });
     }
+    // nextButtonHandler()
 }
