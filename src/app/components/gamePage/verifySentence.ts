@@ -1,18 +1,19 @@
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
-import { getIndex } from './nextBntHandler';
+import { getIndex } from './nextBtnHandler';
 
 function getCurrentSentenceFromGrid() {
     const gridElement = document.getElementById('result-block');
     if (!gridElement) {
         return '';
     }
-    const columns = gridElement.children;
+    const row = gridElement.children;
+
     let sentence = '';
-    for (let i = 0; i < columns.length; i += 1) {
+    for (let i = 0; i < row.length; i += 1) {
         if (i !== 0) {
             sentence += ' ';
         }
-        sentence += columns[i].textContent;
+        sentence += row[i].textContent;
     }
     return sentence;
 }
@@ -23,7 +24,5 @@ export function verifySentence() {
     targetSentence = targetSentence.toLowerCase();
     currentSentence = currentSentence.trim();
     targetSentence = targetSentence.trim();
-    console.log(currentSentence);
-    console.log(targetSentence);
     return currentSentence === targetSentence;
 }

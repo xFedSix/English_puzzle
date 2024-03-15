@@ -1,5 +1,5 @@
 import { verifySentence } from './verifySentence';
-import { enableContinueButton } from './nextBntHandler';
+import { enableContinueButton } from './nextBtnHandler';
 
 export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock: HTMLElement) {
     const wordCard = document.createElement('div');
