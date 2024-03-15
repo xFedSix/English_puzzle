@@ -15,10 +15,13 @@ export class GamePageElements {
 
     checkButton: HTMLElement;
 
+    div: HTMLDivElement;
+
     json: typeof jsonData;
 
     constructor(json: typeof jsonData) {
         this.wrapper = document.createElement('div');
+        this.div = document.createElement('div');
         this.resultBlock = document.createElement('section');
         this.sourceBlock = document.createElement('section');
         this.lineNumberBlock = document.createElement('section');
@@ -45,15 +48,17 @@ export class GamePageElements {
         for (let i = 0; i < this.json.rounds.length; i += 1) {
             total = this.json.rounds[i].words.length;
         }
-        let totalWords = 0;
-        const wordsInText = this.json.rounds[0].words[0].textExample.split(' ').length;
-        totalWords = wordsInText;
+        for (let i = 1; i <= total; i += 1) {
+            const newRowDiv = this.div.cloneNode(true) as HTMLElement;
+            newRowDiv.style.gridRow = `${i}`;
+            newRowDiv.classList.add('sourceRow');
+            newRowDiv.id = `row${i}`;
+            this.resultBlock.appendChild(newRowDiv);
+        }
 
         const gridTemplateRows = `repeat(${total}, auto)`;
-        const gridTemplateColumns = `repeat(${totalWords}, auto)`;
         this.resultBlock.style.display = 'grid';
         this.resultBlock.style.gridTemplateRows = gridTemplateRows;
-        this.resultBlock.style.gridTemplateColumns = gridTemplateColumns;
         setTimeout(() => {
             const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
             const height = this.sourceBlock.scrollHeight / baseFontSize;

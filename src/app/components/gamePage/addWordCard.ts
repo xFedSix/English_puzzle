@@ -5,6 +5,7 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
     const wordCard = document.createElement('div');
     wordCard.classList.add('word-card');
     wordCard.textContent = word;
+    const row1 = resultBlock.querySelector('#row1');
     const clickListener = () => {
         wordCard.classList.add('moving');
         setTimeout(() => {
@@ -12,9 +13,13 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
         }, 500);
         if (wordCard.parentElement === sourceBlock) {
             sourceBlock.removeChild(wordCard);
-            resultBlock.appendChild(wordCard);
+            if (row1) {
+                row1.appendChild(wordCard);
+            }
         } else {
-            resultBlock.removeChild(wordCard);
+            if (row1) {
+                row1.removeChild(wordCard);
+            }
             sourceBlock.appendChild(wordCard);
         }
         if (verifySentence()) {

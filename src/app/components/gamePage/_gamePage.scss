@@ -53,20 +53,26 @@
 }
 #result-block {
     grid-area: result;
-    width: 30rem;
+    width: 29.5rem;
     justify-content: flex-start;
     border: 2px solid rgb(168, 154, 136);
+    .sourceRow {
+        display: flex;
+        align-items: baseline;
+    }
 }
 
 #source-block {
     display: flex;
-    justify-content: flex-start;
     grid-area: source;
+    justify-content: flex-start;
     border: 2px solid rgb(168, 154, 136);
-    width: 30rem;
+    width: 29.5rem;
 }
 .word-card {
     display: flex;
+    // flex-grow: 1;
+    justify-content: center;
     align-items: center;
     border: 1px solid rgb(168, 154, 136);
     background-color: #f0f0f0;
