@@ -123,6 +123,7 @@
   display: inline-block;
   font-size: 16px;
   border-radius: 20px;
+  width: 10rem;
 }
 #game-page__wrapper #next-btn:hover {
   background-color: rgb(109, 99, 87);
