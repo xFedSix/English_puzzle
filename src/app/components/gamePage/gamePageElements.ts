@@ -41,11 +41,11 @@ export class GamePageElements {
             total = this.json.rounds[i].words.length;
         }
         let totalWords = 0;
-        const wordsInTextExample = this.json.rounds[0].words[0].textExample.split(' ').length;
-        totalWords = wordsInTextExample;
+        const wordsInText = this.json.rounds[0].words[0].textExample.split(' ').length;
+        totalWords = wordsInText;
 
-        const gridTemplateRows = Array(total).fill('auto').join(' ');
-        const gridTemplateColumns = Array(totalWords).fill('auto').join(' ');
+        const gridTemplateRows = `repeat(${total}, auto)`;
+        const gridTemplateColumns = `repeat(${totalWords}, auto)`;
         this.resultBlock.style.display = 'grid';
         this.resultBlock.style.gridTemplateRows = gridTemplateRows;
         this.resultBlock.style.gridTemplateColumns = gridTemplateColumns;
@@ -53,7 +53,7 @@ export class GamePageElements {
             const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
             const height = this.sourceBlock.scrollHeight / baseFontSize;
             this.resultBlock.style.minHeight = `${height * total}rem`;
-            this.resultBlock.style.gridTemplateRows = `${height}rem`;
+            // this.resultBlock.style.gridTemplateRows = `${height}rem`;
         }, 0);
 
         this.lineNumberBlock.style.display = 'grid';
