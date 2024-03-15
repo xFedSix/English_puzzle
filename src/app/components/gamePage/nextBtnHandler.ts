@@ -1,15 +1,9 @@
 import { addWorldCards } from './addWorldCards';
+import { getIndex, getRowNumber, setIndex, setRowNumber, setSentence } from './get&set';
 
 let clickHandler: () => void;
 
-let index = 0;
-export function setIndex(value: number) {
-    index = value;
-}
-export function getIndex() {
-    return index;
-}
-export function enableContinueButton() {
+export function enableContinueButton(resultBlock: HTMLElement) {
     const continueButton = document.getElementById('next-btn') as HTMLButtonElement;
     continueButton.disabled = false;
     if (clickHandler) {
@@ -19,10 +13,14 @@ export function enableContinueButton() {
         continueButton.disabled = true;
         const gridElement = document.getElementById('result-block');
         if (gridElement && gridElement.children.length > 0) {
-            const row = gridElement.children[0];
-            row.setAttribute('disabled', 'disabled');
+            const row = resultBlock.querySelector(`#row${getRowNumber()}`);
+            if (row) {
+                row.classList.add('disabled');
+            }
         }
+        setSentence('');
         setIndex(getIndex() + 1);
+        setRowNumber(getRowNumber() + 1);
         addWorldCards();
     };
     continueButton.addEventListener('click', clickHandler);

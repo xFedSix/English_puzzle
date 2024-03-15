@@ -1,11 +1,13 @@
 import { verifySentence } from './verifySentence';
 import { enableContinueButton } from './nextBtnHandler';
+import { getRowNumber } from './get&set';
 
 export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock: HTMLElement) {
     const wordCard = document.createElement('div');
     wordCard.classList.add('word-card');
     wordCard.textContent = word;
-    const row1 = resultBlock.querySelector('#row1');
+    const row = resultBlock.querySelector(`#row${getRowNumber()}`);
+
     const clickListener = () => {
         wordCard.classList.add('moving');
         setTimeout(() => {
@@ -13,17 +15,17 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
         }, 500);
         if (wordCard.parentElement === sourceBlock) {
             sourceBlock.removeChild(wordCard);
-            if (row1) {
-                row1.appendChild(wordCard);
+            if (row) {
+                row.appendChild(wordCard);
             }
         } else {
-            if (row1) {
-                row1.removeChild(wordCard);
+            if (row) {
+                row.removeChild(wordCard);
             }
             sourceBlock.appendChild(wordCard);
         }
         if (verifySentence()) {
-            enableContinueButton();
+            enableContinueButton(resultBlock);
         }
     };
 

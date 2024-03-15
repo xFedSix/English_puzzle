@@ -1,7 +1,7 @@
 import { shuffleArray } from './shuffleArray';
 import { addWordCard } from './addWordCard';
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
-import { getIndex } from './nextBtnHandler';
+import { getIndex } from './get&set';
 
 export function addWorldCards() {
     const round = jsonData.rounds[0];
