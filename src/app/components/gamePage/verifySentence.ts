@@ -1,5 +1,7 @@
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+
 import { enableCheckButton } from './checkBtnHandler';
+
 import { getIndex } from './nextBtnHandler';
 
 export function getCurrentSentenceFromGrid() {
