@@ -13,6 +13,8 @@ export class GamePageElements {
 
     nextButton: HTMLElement;
 
+    checkButton: HTMLElement;
+
     json: typeof jsonData;
 
     constructor(json: typeof jsonData) {
@@ -21,6 +23,7 @@ export class GamePageElements {
         this.sourceBlock = document.createElement('section');
         this.lineNumberBlock = document.createElement('section');
         this.nextButton = document.createElement('button');
+        this.checkButton = document.createElement('button');
         this.json = json;
     }
 
@@ -35,6 +38,8 @@ export class GamePageElements {
         this.sourceBlock.id = 'source-block';
         this.wrapper.appendChild(this.nextButton);
         this.nextButton.id = 'next-btn';
+        this.wrapper.appendChild(this.checkButton);
+        this.checkButton.id = 'check-btn';
 
         let total = 0;
         for (let i = 0; i < this.json.rounds.length; i += 1) {
@@ -53,7 +58,6 @@ export class GamePageElements {
             const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
             const height = this.sourceBlock.scrollHeight / baseFontSize;
             this.resultBlock.style.minHeight = `${height * total}rem`;
-            // this.resultBlock.style.gridTemplateRows = `${height}rem`;
         }, 0);
 
         this.lineNumberBlock.style.display = 'grid';

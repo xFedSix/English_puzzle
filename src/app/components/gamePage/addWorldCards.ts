@@ -12,17 +12,17 @@ export function addWorldCards() {
     const sourceBlock = document.getElementById('source-block') as HTMLElement;
     const resultBlock = document.getElementById('result-block') as HTMLElement;
     const nextButton = document.getElementById('next-btn') as HTMLButtonElement;
+    const checkButton = document.getElementById('check-btn') as HTMLButtonElement;
 
     nextButton.textContent = 'Continue';
     nextButton.disabled = true;
+    checkButton.textContent = 'Check';
+    checkButton.disabled = true;
 
     if (sourceBlock && resultBlock) {
         shuffledWords.forEach((word) => {
             const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-            // const width = sourceBlock.scrollWidth / baseFontSize;
             const height = sourceBlock.scrollHeight / baseFontSize;
-            // resultBlock.style.maxWidth = `${width}rem`;
-            // sourceBlock.style.maxWidth = `${width}rem`;
             sourceBlock.style.minHeight = `${height}rem`;
             addWordCard(word, sourceBlock, resultBlock);
         });

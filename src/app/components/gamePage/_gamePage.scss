@@ -3,12 +3,35 @@
     grid-template-areas:
         'lineNumber result'
         '0 source'
+        '2 check_btn'
         '1 btn';
     grid-row-gap: 20px;
     grid-column-gap: 5px;
+    justify-items: center;
     #next-btn {
         cursor: pointer;
         grid-area: btn;
+        background-color: rgb(168, 154, 136);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 20px;
+        width: 10rem;
+        &:hover {
+            background-color: rgb(109, 99, 87);
+        }
+        &:disabled {
+            background-color: #cccccc;
+            color: #ffffff;
+        }
+    }
+    #check-btn {
+        grid-area: check_btn;
+        cursor: pointer;
         background-color: rgb(168, 154, 136);
         border: none;
         color: white;
