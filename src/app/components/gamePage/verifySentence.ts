@@ -1,7 +1,8 @@
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+import { enableCheckButton } from './checkBtnHandler';
 import { getIndex } from './nextBtnHandler';
 
-function getCurrentSentenceFromGrid() {
+export function getCurrentSentenceFromGrid() {
     const gridElement = document.getElementById('result-block');
     if (!gridElement) {
         return '';
@@ -18,11 +19,19 @@ function getCurrentSentenceFromGrid() {
     return sentence;
 }
 export function verifySentence() {
+    let currentSentenceString = '';
     let targetSentence = jsonData.rounds[0].words[getIndex()].textExample;
     let currentSentence = getCurrentSentenceFromGrid();
     currentSentence = currentSentence.toLowerCase();
     targetSentence = targetSentence.toLowerCase();
+    currentSentenceString += currentSentence;
     currentSentence = currentSentence.trim();
     targetSentence = targetSentence.trim();
-    return currentSentence === targetSentence;
+    console.log(currentSentenceString.length);
+    console.log(targetSentence.length);
+
+    if (currentSentenceString.length === targetSentence.length) {
+        enableCheckButton();
+    }
+    return currentSentenceString === targetSentence;
 }

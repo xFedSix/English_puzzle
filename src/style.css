@@ -107,9 +107,10 @@
 
 #game-page__wrapper {
   display: grid;
-  grid-template-areas: "lineNumber result" "0 source" "1 btn";
+  grid-template-areas: "lineNumber result" "0 source" "2 check_btn" "1 btn";
   grid-row-gap: 20px;
   grid-column-gap: 5px;
+  justify-items: center;
 }
 #game-page__wrapper #next-btn {
   cursor: pointer;
@@ -129,6 +130,27 @@
   background-color: rgb(109, 99, 87);
 }
 #game-page__wrapper #next-btn:disabled {
+  background-color: #cccccc;
+  color: #ffffff;
+}
+#game-page__wrapper #check-btn {
+  grid-area: check_btn;
+  cursor: pointer;
+  background-color: rgb(168, 154, 136);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+  width: 10rem;
+}
+#game-page__wrapper #check-btn:hover {
+  background-color: rgb(109, 99, 87);
+}
+#game-page__wrapper #check-btn:disabled {
   background-color: #cccccc;
   color: #ffffff;
 }

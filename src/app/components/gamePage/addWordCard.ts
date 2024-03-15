@@ -5,12 +5,6 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
     const wordCard = document.createElement('div');
     wordCard.classList.add('word-card');
     wordCard.textContent = word;
-    // const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    // const width = sourceBlock.scrollWidth / baseFontSize;
-    // console.log(sourceBlock.scrollWidth);
-    // console.log(width);
-
-    // wordCard.style.width = `${width}rem`;
     const clickListener = () => {
         wordCard.classList.add('moving');
         setTimeout(() => {
