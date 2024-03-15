@@ -12,6 +12,7 @@ export function addWorldCards() {
     const sourceBlock = document.getElementById('source-block') as HTMLElement;
     const resultBlock = document.getElementById('result-block') as HTMLElement;
     const nextButton = document.getElementById('next-btn') as HTMLButtonElement;
+
     nextButton.textContent = 'Continue';
     nextButton.disabled = true;
 
