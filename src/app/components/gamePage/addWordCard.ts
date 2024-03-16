@@ -35,7 +35,3 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
     sourceBlock.appendChild(wordCard);
     return clickListener;
 }
-
-export function removeClickListener(element: HTMLElement, clickListener: () => void) {
-    element.removeEventListener('click', clickListener);
-}

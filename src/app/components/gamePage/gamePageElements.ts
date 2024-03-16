@@ -17,6 +17,8 @@ export class GamePageElements {
 
     div: HTMLDivElement;
 
+    autoButton: HTMLElement;
+
     json: typeof jsonData;
 
     constructor(json: typeof jsonData) {
@@ -27,6 +29,7 @@ export class GamePageElements {
         this.lineNumberBlock = document.createElement('section');
         this.nextButton = document.createElement('button');
         this.checkButton = document.createElement('button');
+        this.autoButton = document.createElement('button');
         this.json = json;
     }
 
@@ -43,6 +46,8 @@ export class GamePageElements {
         this.nextButton.id = 'next-btn';
         this.wrapper.appendChild(this.checkButton);
         this.checkButton.id = 'check-btn';
+        this.wrapper.appendChild(this.autoButton);
+        this.autoButton.id = 'auto-complete-btn';
 
         let total = 0;
         for (let i = 0; i < this.json.rounds.length; i += 1) {
