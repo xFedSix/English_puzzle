@@ -32,7 +32,7 @@ export function verifySentence() {
     currentSentenceString += currentSentence;
     currentSentence = currentSentence.trim();
     targetSentence = targetSentence.trim();
-  
+
     if (currentSentenceString.length === targetSentence.length) {
         enableCheckButton();
     }

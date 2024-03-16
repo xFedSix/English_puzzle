@@ -6,6 +6,7 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
     const wordCard = document.createElement('div');
     wordCard.classList.add('word-card');
     wordCard.textContent = word;
+
     const row = resultBlock.querySelector(`#row${getRowNumber()}`);
 
     const clickListener = () => {
