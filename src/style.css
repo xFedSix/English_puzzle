@@ -107,7 +107,7 @@
 
 #game-page__wrapper {
   display: grid;
-  grid-template-areas: "lineNumber result" "0 source" "2 check_btn" "1 btn";
+  grid-template-areas: "lineNumber result" "0 source" "1 check_btn" "2 btn";
   grid-row-gap: 20px;
   grid-column-gap: 5px;
   justify-items: center;
@@ -133,8 +133,18 @@
   background-color: #cccccc;
   color: #ffffff;
 }
+#game-page__wrapper #next-btn.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 2s ease-in-out;
+}
+#game-page__wrapper #next-btn.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 2s ease-in-out;
+}
 #game-page__wrapper #check-btn {
-  grid-area: check_btn;
+  grid-area: btn;
   cursor: pointer;
   background-color: rgb(168, 154, 136);
   border: none;
@@ -153,6 +163,16 @@
 #game-page__wrapper #check-btn:disabled {
   background-color: #cccccc;
   color: #ffffff;
+}
+#game-page__wrapper #check-btn.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 2s ease-in-out;
+}
+#game-page__wrapper #check-btn.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 2s ease-in-out;
 }
 
 #result-block {

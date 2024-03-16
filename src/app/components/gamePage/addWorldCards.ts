@@ -15,8 +15,10 @@ export function addWorldCards() {
     const checkButton = document.getElementById('check-btn') as HTMLButtonElement;
 
     nextButton.textContent = 'Continue';
+    nextButton.classList.add('hidden');
     nextButton.disabled = true;
     checkButton.textContent = 'Check';
+    checkButton.classList.add('visible');
     checkButton.disabled = true;
 
     if (sourceBlock && resultBlock) {
