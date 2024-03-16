@@ -1,21 +1,31 @@
+import { getIndex, getRowNumber } from './get&set';
+import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+
 let clickHandler: () => void;
 
 export function enableCheckButton() {
     const checkButton = document.getElementById('check-btn') as HTMLButtonElement;
     checkButton.disabled = false;
-    // if (clickHandler) {
-    //     checkButton.removeEventListener('click', clickHandler);
-    // }
     clickHandler = () => {
-        // const gridElement = document.getElementById('result-block');
-        // for (let i = 0; i < targetWords.length; i += 1) {
-        //     let wordElement = document.getElementById('word-card' + i);
-        //     if (targetWords[i] === currentWords[i]) {
-        //         wordElement.style.color = 'green';
-        //     } else {
-        //         wordElement.style.color = 'red';
-        //     }
-        // }
+        const targetSentence = jsonData.rounds[0].words[getIndex()].textExample.trim().toLowerCase();
+        const targetWords = targetSentence.split(' ');
+
+        const row = document.querySelector(`#row${getRowNumber()}`);
+        if (row) {
+            Array.from(row.children).forEach((child, index) => {
+                if (index < targetWords.length) {
+                    const wordCard = child as HTMLElement;
+                    if (wordCard.textContent) {
+                        const word = wordCard.textContent.toLocaleLowerCase().trim();
+                        if (word === targetWords[index]) {
+                            wordCard.style.color = 'green';
+                        } else {
+                            wordCard.style.color = 'red';
+                        }
+                    }
+                }
+            });
+        }
     };
     checkButton.addEventListener('click', clickHandler);
 }

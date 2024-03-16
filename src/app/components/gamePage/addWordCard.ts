@@ -22,6 +22,7 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
         } else {
             if (row) {
                 row.removeChild(wordCard);
+                wordCard.style.color = 'black';
             }
             sourceBlock.appendChild(wordCard);
         }

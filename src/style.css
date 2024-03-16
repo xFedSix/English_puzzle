@@ -165,9 +165,9 @@
   display: flex;
   align-items: baseline;
 }
-
 #result-block .sourceRow.disabled {
   pointer-events: none;
+}
 
 #source-block {
   display: flex;
