@@ -6,7 +6,7 @@ export function createElements() {
     const lineNumberBlock = document.createElement('section');
     const nextButton = document.createElement('button');
     const checkButton = document.createElement('button');
-    const autoButton = document.createElement('button');
+    const autoCompleteButton = document.createElement('button');
 
     return {
         div,
@@ -16,6 +16,6 @@ export function createElements() {
         lineNumberBlock,
         nextButton,
         checkButton,
-        autoButton,
+        autoCompleteButton,
     };
 }

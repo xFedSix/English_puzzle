@@ -1,13 +1,13 @@
 import { addWorldCards } from './addWorldCards';
 import { getIndex, getRowNumber, setIndex, setRowNumber, setSentence } from './get&set';
 import { toggleButtonClasses } from './toggleBtnClasses';
+import { initElements } from '../constants';
+
+const { checkButton, autoCompleteButton, continueButton } = initElements();
 
 let clickHandler: () => void;
 
 export function enableContinueButton(resultBlock: HTMLElement) {
-    const continueButton = document.getElementById('next-btn') as HTMLButtonElement;
-    const checkButton = document.getElementById('check-btn') as HTMLButtonElement;
-    const autoComplete = document.getElementById('auto-complete-btn') as HTMLButtonElement;
     continueButton.disabled = false;
 
     toggleButtonClasses(continueButton, 'visible', 'hidden');
@@ -16,7 +16,7 @@ export function enableContinueButton(resultBlock: HTMLElement) {
         continueButton.removeEventListener('click', clickHandler);
     }
     clickHandler = () => {
-        autoComplete.disabled = false;
+        autoCompleteButton.disabled = false;
         continueButton.disabled = true;
         const gridElement = document.getElementById('result-block');
         if (gridElement && gridElement.children.length > 0) {

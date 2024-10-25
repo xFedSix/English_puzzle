@@ -9,14 +9,14 @@ export function checkLoginStatus() {
     if (firstName && lastName) {
         const startPage = new StartPage();
         startPage.render(document.body);
-    } else {
-        const userNameEntryPage = new UserNameEntryPage();
-        userNameEntryPage.initializeForm();
-        formSubmitHandler(
-            userNameEntryPage.form,
-            userNameEntryPage.firstNameInput,
-            userNameEntryPage.lastNameInput,
-            userNameEntryPage.formState
-        );
+        return;
     }
+    const userNameEntryPage = new UserNameEntryPage();
+    userNameEntryPage.initializeForm();
+    formSubmitHandler(
+        userNameEntryPage.form,
+        userNameEntryPage.firstNameInput,
+        userNameEntryPage.lastNameInput,
+        userNameEntryPage.formState
+    );
 }

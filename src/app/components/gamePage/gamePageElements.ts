@@ -15,7 +15,7 @@ export class GamePageElements {
 
     checkButton: HTMLElement;
 
-    autoButton: HTMLElement;
+    autoCompleteButton: HTMLElement;
 
     nextButton: HTMLElement;
 
@@ -30,7 +30,7 @@ export class GamePageElements {
         this.lineNumberBlock = elements.lineNumberBlock;
         this.nextButton = elements.nextButton;
         this.checkButton = elements.checkButton;
-        this.autoButton = elements.autoButton;
+        this.autoCompleteButton = elements.autoCompleteButton;
         this.json = json;
     }
 

@@ -1,3 +1,4 @@
+import { initElements } from '../constants';
 import { addWorldCards } from './addWorldCards';
 import { GamePageElements } from './gamePageElements';
 
@@ -15,8 +16,8 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     elements.nextButton.id = 'next-btn';
     elements.wrapper.appendChild(elements.checkButton);
     elements.checkButton.id = 'check-btn';
-    elements.wrapper.appendChild(elements.autoButton);
-    elements.autoButton.id = 'auto-complete-btn';
+    elements.wrapper.appendChild(elements.autoCompleteButton);
+    elements.autoCompleteButton.id = 'auto-complete-btn';
 
     let total = 0;
     for (let i = 0; i < elements.json.rounds.length; i += 1) {
@@ -45,5 +46,6 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
         lineNumber.textContent = i.toString();
         elements.lineNumberBlock.appendChild(lineNumber);
     }
+    initElements();
     addWorldCards();
 }

@@ -2,15 +2,12 @@ import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
 import { getIndex, getRowNumber } from './get&set';
 import { enableContinueButton } from './nextBtnHandler';
 import { toggleButtonClasses } from './toggleBtnClasses';
+import { initElements } from '../constants';
 
 let clickHandler: () => void;
 
 export function autoCompleteBtn() {
-    const autoComplete = document.getElementById('auto-complete-btn') as HTMLButtonElement;
-    const sourceBlock = document.getElementById('source-block') as HTMLDivElement;
-    const continueButton = document.getElementById('next-btn') as HTMLButtonElement;
-    const checkButton = document.getElementById('check-btn') as HTMLButtonElement;
-    const resultBlock = document.getElementById('result-block') as HTMLDivElement;
+    const { sourceBlock, resultBlock, checkButton, autoCompleteButton, continueButton } = initElements();
 
     let wordElements: HTMLElement[] = [];
     const targetSentence = jsonData.rounds[0].words[getIndex()].textExample.trim();
@@ -22,7 +19,7 @@ export function autoCompleteBtn() {
     });
 
     clickHandler = () => {
-        autoComplete.disabled = true;
+        autoCompleteButton.disabled = true;
         const gridRow = document.querySelector(`#row${getRowNumber()}`);
         continueButton.disabled = false;
         toggleButtonClasses(continueButton, 'visible', 'hidden');
@@ -53,5 +50,5 @@ export function autoCompleteBtn() {
 
         enableContinueButton(resultBlock);
     };
-    autoComplete.addEventListener('click', clickHandler);
+    autoCompleteButton.addEventListener('click', clickHandler);
 }

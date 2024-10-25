@@ -1,10 +1,11 @@
 import { getIndex, getRowNumber } from './get&set';
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+import { initElements } from '../constants';
 
 let clickHandler: () => void;
 
 export function enableCheckButton() {
-    const checkButton = document.getElementById('check-btn') as HTMLButtonElement;
+    const { checkButton } = initElements();
     checkButton.disabled = false;
     clickHandler = () => {
         const targetSentence = jsonData.rounds[0].words[getIndex()].textExample.trim().toLowerCase();
