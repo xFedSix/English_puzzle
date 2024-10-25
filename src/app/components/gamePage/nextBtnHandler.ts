@@ -3,11 +3,10 @@ import { getIndex, getRowNumber, setIndex, setRowNumber, setSentence } from './g
 import { toggleButtonClasses } from './toggleBtnClasses';
 import { initElements } from '../constants';
 
-const { checkButton, autoCompleteButton, continueButton } = initElements();
-
 let clickHandler: () => void;
 
 export function enableContinueButton(resultBlock: HTMLElement) {
+    const { checkButton, autoCompleteButton, continueButton } = initElements();
     continueButton.disabled = false;
 
     toggleButtonClasses(continueButton, 'visible', 'hidden');

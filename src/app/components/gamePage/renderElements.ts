@@ -1,4 +1,3 @@
-import { initElements } from '../constants';
 import { addWorldCards } from './addWorldCards';
 import { GamePageElements } from './gamePageElements';
 
@@ -46,6 +45,5 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
         lineNumber.textContent = i.toString();
         elements.lineNumberBlock.appendChild(lineNumber);
     }
-    initElements();
     addWorldCards();
 }
