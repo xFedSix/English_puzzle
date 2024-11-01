@@ -58,6 +58,7 @@
         "webpack-dev-server": "^5.0.2"
     },
     "dependencies": {
+        "bootstrap": "^5.3.3",
         "commitlint": "^19.0.3"
     }
 }

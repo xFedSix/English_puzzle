@@ -1,5 +1,5 @@
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
-import { getIndex, getRowNumber } from './get&set';
+import { getIndex, getRound, getRowNumber } from './get&set';
 import { enableContinueButton } from './nextBtnHandler';
 import { toggleButtonClasses } from './toggleBtnClasses';
 import { initElements } from '../constants';
@@ -10,7 +10,7 @@ export function autoCompleteBtn() {
     const { sourceBlock, resultBlock, checkButton, autoCompleteButton, continueButton } = initElements();
 
     let wordElements: HTMLElement[] = [];
-    const targetSentence = jsonData.rounds[0].words[getIndex()].textExample.trim();
+    const targetSentence = jsonData.rounds[getRound()].words[getIndex()].textExample.trim();
     const targetWords = targetSentence.split(' ');
     targetWords.forEach((word) => {
         const wordElement = document.createElement('div');

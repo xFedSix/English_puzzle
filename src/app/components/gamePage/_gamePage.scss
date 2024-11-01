@@ -1,6 +1,7 @@
 #game-page__wrapper {
     display: grid;
     grid-template-areas:
+        '-1 hits'
         'lineNumber result'
         '0 source'
         '1 check_btn'
@@ -9,6 +10,40 @@
     grid-row-gap: 20px;
     grid-column-gap: 5px;
     justify-items: center;
+
+    #game-hints {
+        display: flex;
+        width: 29.5rem;
+        align-items: center;
+        justify-content: space-evenly;
+        grid-area: hits;
+        #game-level__wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        #game-hint_translate {
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            background-image: url('../src/images/translate_icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: none;
+            background-color: rgb(219, 210, 210);
+        }
+        #game-hint_sound {
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            background-image: url('../src/images/audio_icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: none;
+            background-color: rgb(219, 210, 210);
+        }
+    }
     #next-btn {
         cursor: pointer;
         grid-area: btn;

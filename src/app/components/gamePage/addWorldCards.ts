@@ -1,13 +1,13 @@
 import { shuffleArray } from './shuffleArray';
 import { addWordCard } from './addWordCard';
 import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
-import { getIndex } from './get&set';
+import { getIndex, getRound } from './get&set';
 import { autoCompleteBtn } from './autoCompleteBtn';
 import { initElements } from '../constants';
 
 export function addWorldCards() {
     const { sourceBlock, resultBlock, nextButton, checkButton, autoCompleteButton } = initElements();
-    const round = jsonData.rounds[0];
+    const round = jsonData.rounds[getRound()];
     const wordsArray = round.words;
     const { textExample } = wordsArray[getIndex()];
     const words = textExample.split(' ');

@@ -1,13 +1,18 @@
 let index = 0;
+let round = 0;
+let sentence = '';
 export function setIndex(value: number) {
     index = value;
 }
 export function getIndex() {
     return index;
 }
-
-let sentence = '';
-
+export function setRound(value: number) {
+    round = value;
+}
+export function getRound() {
+    return round;
+}
 export function setSentence(value: string) {
     sentence = value;
 }

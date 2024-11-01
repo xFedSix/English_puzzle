@@ -1,5 +1,5 @@
 import { addWorldCards } from './addWorldCards';
-import { getIndex, getRowNumber, setIndex, setRowNumber, setSentence } from './get&set';
+import { getIndex, getRound, getRowNumber, setIndex, setRound, setRowNumber, setSentence } from './get&set';
 import { toggleButtonClasses } from './toggleBtnClasses';
 import { initElements } from '../constants';
 
@@ -17,8 +17,7 @@ export function enableContinueButton(resultBlock: HTMLElement) {
     clickHandler = () => {
         autoCompleteButton.disabled = false;
         continueButton.disabled = true;
-        const gridElement = document.getElementById('result-block');
-        if (gridElement && gridElement.children.length > 0) {
+        if (resultBlock && resultBlock.children.length > 0) {
             const row = resultBlock.querySelector(`#row${getRowNumber()}`);
             if (row) {
                 row.classList.add('disabled');
@@ -27,7 +26,16 @@ export function enableContinueButton(resultBlock: HTMLElement) {
             }
         }
         setSentence('');
-        setIndex(getIndex() + 1);
+        if (getRowNumber() <= 9) {
+            setIndex(getIndex() + 1);
+        } else {
+            setIndex(0);
+            setRound(getRound() + 1);
+            setRowNumber(1);
+            while (resultBlock.firstChild) {
+                resultBlock.removeChild(resultBlock.firstChild);
+            }
+        }
         setRowNumber(getRowNumber() + 1);
         addWorldCards();
     };

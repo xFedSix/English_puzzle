@@ -3,7 +3,45 @@ import { GamePageElements } from './gamePageElements';
 
 export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
+    parent.appendChild(elements.hintsWrapper);
     parent.appendChild(elements.wrapper);
+    elements.wrapper.insertBefore(elements.hintsWrapper, elements.wrapper.firstChild);
+    elements.hintsWrapper.id = 'game-hints';
+    elements.hintsWrapper.appendChild(elements.gameLevel);
+    elements.gameLevel.id = 'game-level__wrapper';
+    const levelTextNode = document.createTextNode('Level');
+    elements.gameLevel.appendChild(levelTextNode);
+    for (let i = 0; i < 2; i += 1) {
+        const link = document.createElement('a');
+        link.id = `game-link-${i}`;
+        link.classList.add('btn', 'btn-secondary', 'dropdown-toggle');
+        link.href = '#';
+        link.role = 'button';
+        link.setAttribute('data-bs-toggle', 'dropdown');
+        link.setAttribute('aria-expanded', 'false');
+        link.textContent = `Link ${i + 1}`;
+        elements.gameLevel.appendChild(link);
+
+        const ul = document.createElement('ul');
+        ul.id = `game-ul-${i}`;
+        ul.classList.add('dropdown-menu');
+        elements.gameLevel.appendChild(ul);
+
+        for (let j = 0; j < 2; j += 1) {
+            const li = document.createElement('li');
+            li.classList.add('dropdown-item');
+            li.textContent = `Item ${j + 1}`;
+            ul.appendChild(li);
+        }
+        if (i === 0) {
+            const pageTextNode = document.createTextNode('Page');
+            elements.gameLevel.appendChild(pageTextNode);
+        }
+    }
+    elements.hintsWrapper.appendChild(elements.gameHintTranslate);
+    elements.gameHintTranslate.id = 'game-hint_translate';
+    elements.hintsWrapper.appendChild(elements.gameHintSound);
+    elements.gameHintSound.id = 'game-hint_sound';
     elements.wrapper.id = 'game-page__wrapper';
     elements.wrapper.appendChild(elements.lineNumberBlock);
     elements.lineNumberBlock.id = 'line-number-block';
