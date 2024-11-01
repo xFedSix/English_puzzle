@@ -5,10 +5,14 @@ import { getIndex, getRound } from './get&set';
 import { autoCompleteBtn } from './autoCompleteBtn';
 import { initElements } from '../constants';
 
+interface Word {
+    textExample: string;
+}
+let wordsArray: Word[] = [];
 export function addWorldCards() {
     const { sourceBlock, resultBlock, nextButton, checkButton, autoCompleteButton } = initElements();
     const round = jsonData.rounds[getRound()];
-    const wordsArray = round.words;
+    wordsArray = round.words;
     const { textExample } = wordsArray[getIndex()];
     const words = textExample.split(' ');
     const shuffledWords = shuffleArray(words);
@@ -29,4 +33,7 @@ export function addWorldCards() {
         });
     }
     autoCompleteBtn();
+}
+export function getWordsArray(): Word[] {
+    return wordsArray;
 }

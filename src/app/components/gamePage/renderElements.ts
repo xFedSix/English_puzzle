@@ -1,8 +1,11 @@
-import { addWorldCards } from './addWorldCards';
+// import { initElements } from '../constants';
+import { addWorldCards, getWordsArray } from './addWorldCards';
 import { GamePageElements } from './gamePageElements';
+import { drawGrid } from './renderResultBlock';
 
 export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
+    // const { resultBlock } = initElements();
     parent.appendChild(elements.hintsWrapper);
     parent.appendChild(elements.wrapper);
     elements.wrapper.insertBefore(elements.hintsWrapper, elements.wrapper.firstChild);
@@ -56,32 +59,52 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     elements.wrapper.appendChild(elements.autoCompleteButton);
     elements.autoCompleteButton.id = 'auto-complete-btn';
 
-    let total = 0;
-    for (let i = 0; i < elements.json.rounds.length; i += 1) {
-        total = elements.json.rounds[i].words.length;
-    }
-    for (let i = 1; i <= total; i += 1) {
-        const newRowDiv = elements.div.cloneNode(true) as HTMLElement;
-        newRowDiv.style.gridRow = `${i}`;
-        newRowDiv.classList.add('sourceRow');
-        newRowDiv.id = `row${i}`;
-        elements.resultBlock.appendChild(newRowDiv);
-    }
+    // for (let i = 1; i <= totalRows; i += 1) {
+    //     const newRowDiv = elements.div.cloneNode(true) as HTMLElement;
+    //     newRowDiv.style.gridRow = `${i}`;
+    //     newRowDiv.classList.add('sourceRow');
+    //     newRowDiv.id = `row${i}`;
+    //     elements.resultBlock.appendChild(newRowDiv);
+    // }
+    // for (let i = 0; i < totalColumns; i += 1) {
+    //     const newColumnsDiv = elements.div.cloneNode(true) as HTMLElement;
+    //     newColumnsDiv.style.gridRow = `${i}`;
+    //     newColumnsDiv.classList.add('sourceColumns');
+    //     newColumnsDiv.id = `col${i}`;
+    //     elements.resultBlock.appendChild(newColumnsDiv);
+    // }
 
-    const gridTemplateRows = `repeat(${total}, auto)`;
-    elements.resultBlock.style.display = 'grid';
-    elements.resultBlock.style.gridTemplateRows = gridTemplateRows;
-    setTimeout(() => {
-        const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        const height = elements.sourceBlock.scrollHeight / baseFontSize;
-        elements.resultBlock.style.minHeight = `${height * total}rem`;
-    }, 0);
+    // const gridTemplateRows = `repeat(${totalRows}, auto)`;
+    // const gridTemplateColumns = `repeat(${totalColumns}, auto)`;
+    // elements.resultBlock.style.display = 'grid';
+    // elements.resultBlock.style.gridTemplateRows = gridTemplateRows;
+    // elements.resultBlock.style.gridTemplateColumns = gridTemplateColumns;
+    // setTimeout(() => {
+    //     const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    //     const height = elements.sourceBlock.scrollHeight / baseFontSize;
+    //     elements.resultBlock.style.minHeight = `${height * totalRows}rem`;
+    // }, 0);
+    let totalRows = 0;
+    const columnsPerRow: number[] = [];
+
+    for (let i = 0; i < elements.json.rounds.length; i += 1) {
+        totalRows = elements.json.rounds[i].words.length;
+    }
 
     elements.lineNumberBlock.style.display = 'grid';
-    for (let i = 1; i <= total; i += 1) {
+    for (let i = 1; i <= totalRows; i += 1) {
         const lineNumber = document.createElement('div');
         lineNumber.textContent = i.toString();
         elements.lineNumberBlock.appendChild(lineNumber);
     }
     addWorldCards();
+    const wordsArray = getWordsArray();
+
+    for (let i = 0; i < wordsArray.length; i += 1) {
+        const { textExample } = wordsArray[i];
+        const wordCount = textExample.split(' ').length;
+        columnsPerRow.push(wordCount);
+    }
+
+    drawGrid(totalRows, columnsPerRow, gamePageElements);
 }

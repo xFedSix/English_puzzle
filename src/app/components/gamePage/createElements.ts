@@ -5,7 +5,7 @@ export function createElements() {
     const hintsWrapper = document.createElement('section');
     const gameHintTranslate = document.createElement('button');
     const gameHintSound = document.createElement('button');
-    const resultBlock = document.createElement('section');
+    const resultBlock = document.createElement('canvas');
     const sourceBlock = document.createElement('section');
     const lineNumberBlock = document.createElement('section');
     const nextButton = document.createElement('button');
