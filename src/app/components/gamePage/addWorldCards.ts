@@ -9,9 +9,9 @@ interface Word {
     textExample: string;
 }
 let wordsArray: Word[] = [];
+const round = jsonData.rounds[getRound()];
 export function addWorldCards() {
     const { sourceBlock, resultBlock, nextButton, checkButton, autoCompleteButton } = initElements();
-    const round = jsonData.rounds[getRound()];
     wordsArray = round.words;
     const { textExample } = wordsArray[getIndex()];
     const words = textExample.split(' ');
@@ -36,4 +36,21 @@ export function addWorldCards() {
 }
 export function getWordsArray(): Word[] {
     return wordsArray;
+}
+const importAll = (r: __WebpackModuleApi.RequireContext): { [key: string]: string } => {
+    const images: { [key: string]: string } = {};
+    r.keys().forEach((item: string) => {
+        images[item.replace('./', '')] = r(item);
+    });
+    return images;
+};
+
+const images = importAll(require.context('../../../images/', true, /\.(png|jpe?g|svg)$/));
+
+export function getBackgroundSrc(): string {
+    const { imageSrc } = round.levelData;
+    if (!images[imageSrc]) {
+        throw new Error(`Image not found: ${imageSrc}`);
+    }
+    return images[imageSrc];
 }

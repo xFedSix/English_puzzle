@@ -9,10 +9,18 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "strictNullChecks": true,
+        "baseUrl": "./",
     },
     "paths": {
         "@worldCollectionData/*": [
             "src/worldCollectionData/*"
+        ],
+        "*": [
+            "node_modules/*",
+            "src/types/*"
+        ],
+        "src/*": [
+            "src/*"
         ]
     },
     "rules": {
@@ -29,7 +37,10 @@
     "include": [
         "src/**/*.ts",
         "src/**/*.css",
-        "src/**/*.json"
+        "src/**/*.json",
+        "src/**/*.jpg",
+        "src/**/*",
+        "global.d.ts"
     ],
     "exclude": [
         "dist",

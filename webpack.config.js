@@ -51,7 +51,7 @@ module.exports = ({ develop }) => ({
         ],
     },
     resolve: {
-        extensions: ['.js', '.json', '.ts'],
+        extensions: ['.js', '.json', '.ts', '.jpg', '.jpeg', '.png', '.gif', '.svg'],
     },
     plugins: [
         new HtmlWebpackPlugin({

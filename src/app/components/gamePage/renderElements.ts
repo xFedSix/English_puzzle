@@ -1,7 +1,9 @@
 // import { initElements } from '../constants';
-import { addWorldCards, getWordsArray } from './addWorldCards';
+
+import { addWorldCards, getBackgroundSrc, getWordsArray } from './addWorldCards';
 import { GamePageElements } from './gamePageElements';
 import { drawGrid } from './renderResultBlock';
+import { setResultBlockBackground } from './setResultBlockBackground';
 
 export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
@@ -107,4 +109,6 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     }
 
     drawGrid(totalRows, columnsPerRow, gamePageElements);
+
+    setResultBlockBackground(getBackgroundSrc());
 }

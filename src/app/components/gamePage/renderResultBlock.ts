@@ -37,9 +37,3 @@ export function drawGrid(totalRows: number, columnsPerRow: number[], gamePageEle
     ctx.lineTo(ctx.canvas.width, totalRows * (ctx.canvas.height / totalRows));
     ctx.stroke();
 }
-
-export function addTextToCanvas(ctx: CanvasRenderingContext2D, text: string, x: number, y: number) {
-    ctx.font = '16px Arial';
-    ctx.fillStyle = 'black';
-    ctx.fillText(text, x, y);
-}

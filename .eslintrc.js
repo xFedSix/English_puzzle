@@ -22,6 +22,7 @@ module.exports = {
             typescript: true,
             node: {
                 extensions: ['.ts'],
+                paths: ['src'],
             },
         },
     },
