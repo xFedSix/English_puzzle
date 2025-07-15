@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const devServer = (isDev) =>
     !isDev
@@ -51,7 +52,7 @@ module.exports = ({ develop }) => ({
         ],
     },
     resolve: {
-        extensions: ['.js', '.json', '.ts'],
+        extensions: ['.js', '.json', '.ts', '.jpg', '.jpeg', '.png', '.gif', '.svg'],
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -61,6 +62,9 @@ module.exports = ({ develop }) => ({
             filename: '[name].[contenthash].css',
         }),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new CopyPlugin({
+            patterns: [{ from: 'src/worldCollectionData/files', to: 'files' }],
+        }),
     ],
     ...devServer(develop),
 });

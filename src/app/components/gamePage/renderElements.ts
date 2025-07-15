@@ -1,6 +1,17 @@
 import { addWorldCards } from './addWorldCards';
 import { GamePageElements } from './gamePageElements';
 
+// Статический массив файлов уровней
+const levelFiles = [
+    'worldCollectionLevel1.json',
+    'worldCollectionLevel2.json',
+    'worldCollectionLevel3.json',
+    'worldCollectionLevel4.json',
+    'worldCollectionLevel5.json',
+    'worldCollectionLevel6.json',
+];
+const levelCount = levelFiles.length;
+
 export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
     parent.appendChild(elements.hintsWrapper);
@@ -11,7 +22,8 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     elements.gameLevel.id = 'game-level__wrapper';
     const levelTextNode = document.createTextNode('Level');
     elements.gameLevel.appendChild(levelTextNode);
-    for (let i = 0; i < 2; i += 1) {
+
+    for (let i = 0; i < levelCount; i += 1) {
         const link = document.createElement('a');
         link.id = `game-link-${i}`;
         link.classList.add('btn', 'btn-secondary', 'dropdown-toggle');
@@ -19,7 +31,7 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
         link.role = 'button';
         link.setAttribute('data-bs-toggle', 'dropdown');
         link.setAttribute('aria-expanded', 'false');
-        link.textContent = `Link ${i + 1}`;
+        link.textContent = `${i + 1}`;
         elements.gameLevel.appendChild(link);
 
         const ul = document.createElement('ul');
@@ -27,14 +39,14 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
         ul.classList.add('dropdown-menu');
         elements.gameLevel.appendChild(ul);
 
-        for (let j = 0; j < 2; j += 1) {
+        for (let j = 0; j < levelCount; j += 1) {
             const li = document.createElement('li');
             li.classList.add('dropdown-item');
-            li.textContent = `Item ${j + 1}`;
+            li.textContent = `${j + 1}`;
             ul.appendChild(li);
         }
         if (i === 0) {
-            const pageTextNode = document.createTextNode('Page');
+            const pageTextNode = document.createTextNode('Round');
             elements.gameLevel.appendChild(pageTextNode);
         }
     }
