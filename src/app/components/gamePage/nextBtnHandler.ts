@@ -3,6 +3,7 @@ import { levelFiles } from './worldCollectionReader';
 import { getIndex, getRound, getRowNumber, setIndex, setRound, setRowNumber, setSentence, getLevel } from './get&set';
 import { toggleButtonClasses } from './toggleBtnClasses';
 import { initElements } from '../constants';
+import { clearBlocks } from './clearBlocks';
 
 let clickHandler: () => void;
 
@@ -33,6 +34,7 @@ export function enableContinueButton(resultBlock: HTMLElement) {
             setIndex(0);
             setRound(getRound() + 1);
             setRowNumber(1);
+            clearBlocks();
             while (resultBlock.firstChild) {
                 resultBlock.removeChild(resultBlock.firstChild);
             }

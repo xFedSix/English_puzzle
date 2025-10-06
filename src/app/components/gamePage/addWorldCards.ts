@@ -26,7 +26,7 @@ export async function addWorldCards(fileName: string) {
             const baseFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
             const height = sourceBlock.scrollHeight / baseFontSize;
             sourceBlock.style.minHeight = `${height}rem`;
-            addWordCard(word, sourceBlock, resultBlock);
+            addWordCard(word, sourceBlock, resultBlock, fileName);
         });
     }
     autoCompleteBtn();

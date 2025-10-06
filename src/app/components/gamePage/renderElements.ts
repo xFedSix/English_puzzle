@@ -1,4 +1,7 @@
 import { addWorldCards } from './addWorldCards';
+import { createResultRows } from './createResultRows';
+import { clearBlocks } from './clearBlocks';
+import { setLevel, getLevel, setRound } from './get&set';
 import { GamePageElements } from './gamePageElements';
 import { readWorldCollection, levelFiles } from './worldCollectionReader';
 
@@ -7,7 +10,7 @@ const levelCount = levelFiles.length;
 // Для примера, roundsCount можно получить из worldCollection (здесь захардкожено, но в реальном коде — из данных)
 let roundsCount = 10; // по умолчанию, будет обновляться при смене уровня
 
-export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
+export async function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
     parent.appendChild(elements.hintsWrapper);
     parent.appendChild(elements.wrapper);
@@ -60,10 +63,17 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
             a.className = 'dropdown-item';
             a.href = '#';
             a.textContent = `Round ${j + 1}`;
-            a.onclick = (e) => {
+            a.onclick = async (e) => {
                 e.preventDefault();
                 roundsBtn.textContent = `Round ${j + 1}`;
-                // Здесь логика смены раунда
+                setRound(j);
+                clearBlocks();
+                // Получаем количество слов для текущего уровня и раунда
+                const jsonData = await readWorldCollection(levelFiles[getLevel() - 1]);
+                const round = jsonData.rounds[j];
+                const wordsCount = round.words.length;
+                createResultRows(wordsCount, elements.div);
+                await addWorldCards(levelFiles[getLevel() - 1]);
             };
             li.appendChild(a);
             roundsMenu.appendChild(li);
@@ -74,10 +84,17 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     function handleLevelSelect(idx: number) {
         return async (e: MouseEvent) => {
             e.preventDefault();
+            setLevel(idx + 1);
             const collection = await readWorldCollection(levelFiles[idx]);
             roundsCount = collection.roundsCount;
             updateRoundsMenu();
             levelBtn.textContent = `Level ${idx + 1}`;
+            clearBlocks();
+            // Получаем количество слов для первого раунда нового уровня
+            const round = collection.rounds[0];
+            const wordsCount = round.words.length;
+            createResultRows(wordsCount, elements.div);
+            await addWorldCards(levelFiles[idx]);
         };
     }
     for (let i = 0; i < levelCount; i += 1) {
@@ -137,5 +154,11 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
         lineNumber.textContent = i.toString();
         elements.lineNumberBlock.appendChild(lineNumber);
     }
-    addWorldCards(levelFiles[levelIdx - 1]);
+    clearBlocks();
+    // Для начального рендера — первый уровень, первый раунд
+    const jsonData = await readWorldCollection(levelFiles[getLevel() - 1]);
+    const round = jsonData.rounds[0];
+    const wordsCount = round.words.length;
+    createResultRows(wordsCount, elements.div);
+    await addWorldCards(levelFiles[getLevel() - 1]);
 }

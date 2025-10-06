@@ -1,4 +1,4 @@
-import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+import { readWorldCollection } from './worldCollectionReader';
 
 import { enableCheckButton } from './checkBtnHandler';
 
@@ -23,7 +23,8 @@ export function getCurrentSentenceFromGrid() {
     return finalSentence;
 }
 
-export function verifySentence() {
+export async function verifySentence(fileName: string) {
+    const jsonData = await readWorldCollection(fileName);
     let currentSentenceString = '';
     let targetSentence = jsonData.rounds[0].words[getIndex()].textExample;
     let currentSentence = getCurrentSentenceFromGrid();
