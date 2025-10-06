@@ -12,6 +12,29 @@ const levelFiles = [
 ];
 const levelCount = levelFiles.length;
 
+// Для примера, roundsCount можно получить из worldCollection (здесь захардкожено, но в реальном коде — из данных)
+let roundsCount = 10; // по умолчанию, будет обновляться при смене уровня
+
+/**
+ * Получает roundsCount из файла worldCollectionLevelX.json
+ * @param {string} fileName - имя файла уровня (например, 'worldCollectionLevel1.json')
+ * @returns {Promise<number>} roundsCount
+ */
+async function getRoundsCountFromLevelFile(fileName: string): Promise<number> {
+    try {
+        const response = await fetch(`src/worldCollectionData/${fileName}`);
+        if (!response.ok) throw new Error('File not found');
+        const data = await response.json();
+        // roundsCount может быть либо отдельным полем, либо data.rounds.length
+        if (typeof data.roundsCount === 'number') return data.roundsCount;
+        if (Array.isArray(data.rounds)) return data.rounds.length;
+        throw new Error('roundsCount not found');
+    } catch (e) {
+        // По умолчанию 10, если ошибка
+        return 10;
+    }
+}
+
 export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
     parent.appendChild(elements.hintsWrapper);
@@ -20,36 +43,83 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     elements.hintsWrapper.id = 'game-hints';
     elements.hintsWrapper.appendChild(elements.gameLevel);
     elements.gameLevel.id = 'game-level__wrapper';
-    const levelTextNode = document.createTextNode('Level');
-    elements.gameLevel.appendChild(levelTextNode);
 
-    for (let i = 0; i < levelCount; i += 1) {
-        const link = document.createElement('a');
-        link.id = `game-link-${i}`;
-        link.classList.add('btn', 'btn-secondary', 'dropdown-toggle');
-        link.href = '#';
-        link.role = 'button';
-        link.setAttribute('data-bs-toggle', 'dropdown');
-        link.setAttribute('aria-expanded', 'false');
-        link.textContent = `${i + 1}`;
-        elements.gameLevel.appendChild(link);
+    // --- Level dropdown ---
+    const levelDropdown = document.createElement('div');
+    levelDropdown.className = 'dropdown';
+    const levelBtn = document.createElement('button');
+    levelBtn.className = 'btn btn-secondary dropdown-toggle';
+    levelBtn.type = 'button';
+    levelBtn.id = 'dropdownLevelBtn';
+    levelBtn.setAttribute('data-bs-toggle', 'dropdown');
+    levelBtn.setAttribute('aria-expanded', 'false');
+    levelBtn.textContent = 'Level';
+    levelDropdown.appendChild(levelBtn);
+    const levelMenu = document.createElement('ul');
+    levelMenu.className = 'dropdown-menu';
+    levelMenu.setAttribute('aria-labelledby', 'dropdownLevelBtn');
+    levelDropdown.appendChild(levelMenu);
+    elements.gameLevel.appendChild(levelDropdown);
 
-        const ul = document.createElement('ul');
-        ul.id = `game-ul-${i}`;
-        ul.classList.add('dropdown-menu');
-        elements.gameLevel.appendChild(ul);
+    // --- Rounds dropdown ---
+    const roundsDropdown = document.createElement('div');
+    roundsDropdown.className = 'dropdown';
+    const roundsBtn = document.createElement('button');
+    roundsBtn.className = 'btn btn-secondary dropdown-toggle';
+    roundsBtn.type = 'button';
+    roundsBtn.id = 'dropdownRoundsBtn';
+    roundsBtn.setAttribute('data-bs-toggle', 'dropdown');
+    roundsBtn.setAttribute('aria-expanded', 'false');
+    roundsBtn.textContent = 'Round';
+    roundsDropdown.appendChild(roundsBtn);
+    const roundsMenu = document.createElement('ul');
+    roundsMenu.className = 'dropdown-menu';
+    roundsMenu.setAttribute('aria-labelledby', 'dropdownRoundsBtn');
+    roundsDropdown.appendChild(roundsMenu);
+    elements.gameLevel.appendChild(roundsDropdown);
 
-        for (let j = 0; j < levelCount; j += 1) {
+    // --- Обновление меню раундов ---
+    function updateRoundsMenu() {
+        roundsMenu.innerHTML = '';
+        for (let j = 0; j < roundsCount; j += 1) {
             const li = document.createElement('li');
-            li.classList.add('dropdown-item');
-            li.textContent = `${j + 1}`;
-            ul.appendChild(li);
-        }
-        if (i === 0) {
-            const pageTextNode = document.createTextNode('Round');
-            elements.gameLevel.appendChild(pageTextNode);
+            const a = document.createElement('a');
+            a.className = 'dropdown-item';
+            a.href = '#';
+            a.textContent = `Round ${j + 1}`;
+            a.onclick = (e) => {
+                e.preventDefault();
+                roundsBtn.textContent = `Round ${j + 1}`;
+                // Здесь логика смены раунда
+            };
+            li.appendChild(a);
+            roundsMenu.appendChild(li);
         }
     }
+
+    // --- Заполнение меню уровней ---
+    function handleLevelSelect(levelIdx: number) {
+        return async (e: MouseEvent) => {
+            e.preventDefault();
+            roundsCount = await getRoundsCountFromLevelFile(levelFiles[levelIdx]);
+            updateRoundsMenu();
+            levelBtn.textContent = `Level ${levelIdx + 1}`;
+        };
+    }
+    for (let i = 0; i < levelCount; i += 1) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.className = 'dropdown-item';
+        a.href = '#';
+        a.textContent = `Level ${i + 1}`;
+        a.onclick = handleLevelSelect(i);
+        li.appendChild(a);
+        levelMenu.appendChild(li);
+    }
+
+    updateRoundsMenu();
+
+    // ...остальной код без изменений...
     elements.hintsWrapper.appendChild(elements.gameHintTranslate);
     elements.gameHintTranslate.id = 'game-hint_translate';
     elements.hintsWrapper.appendChild(elements.gameHintSound);
