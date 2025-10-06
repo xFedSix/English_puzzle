@@ -1,5 +1,6 @@
 import { addWorldCards } from './addWorldCards';
-import { getIndex, getRound, getRowNumber, setIndex, setRound, setRowNumber, setSentence } from './get&set';
+import { levelFiles } from './worldCollectionReader';
+import { getIndex, getRound, getRowNumber, setIndex, setRound, setRowNumber, setSentence, getLevel } from './get&set';
 import { toggleButtonClasses } from './toggleBtnClasses';
 import { initElements } from '../constants';
 
@@ -37,7 +38,9 @@ export function enableContinueButton(resultBlock: HTMLElement) {
             }
         }
         setRowNumber(getRowNumber() + 1);
-        addWorldCards();
+        // Определяем текущий уровень (например, через getLevel() или глобальную переменную)
+        const currentLevelIdx = typeof getLevel === 'function' ? getLevel() - 1 : 0;
+        addWorldCards(levelFiles[currentLevelIdx]);
     };
     continueButton.addEventListener('click', clickHandler);
 }

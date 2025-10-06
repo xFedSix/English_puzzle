@@ -1,12 +1,13 @@
 import { shuffleArray } from './shuffleArray';
 import { addWordCard } from './addWordCard';
-import jsonData from '../../../worldCollectionData/worldCollectionLevel1.json';
+import { readWorldCollection } from './worldCollectionReader';
 import { getIndex, getRound } from './get&set';
 import { autoCompleteBtn } from './autoCompleteBtn';
 import { initElements } from '../constants';
 
-export function addWorldCards() {
+export async function addWorldCards(fileName: string) {
     const { sourceBlock, resultBlock, nextButton, checkButton, autoCompleteButton } = initElements();
+    const jsonData = await readWorldCollection(fileName);
     const round = jsonData.rounds[getRound()];
     const wordsArray = round.words;
     const { textExample } = wordsArray[getIndex()];

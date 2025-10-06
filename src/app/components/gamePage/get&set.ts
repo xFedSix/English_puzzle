@@ -1,3 +1,11 @@
+let level = 1;
+
+export function setLevel(value: number) {
+    level = value;
+}
+export function getLevel() {
+    return level;
+}
 let index = 0;
 let round = 0;
 let sentence = '';

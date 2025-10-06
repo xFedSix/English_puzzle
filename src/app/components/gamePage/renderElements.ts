@@ -1,39 +1,11 @@
 import { addWorldCards } from './addWorldCards';
 import { GamePageElements } from './gamePageElements';
+import { readWorldCollection, levelFiles } from './worldCollectionReader';
 
-// Статический массив файлов уровней
-const levelFiles = [
-    'worldCollectionLevel1.json',
-    'worldCollectionLevel2.json',
-    'worldCollectionLevel3.json',
-    'worldCollectionLevel4.json',
-    'worldCollectionLevel5.json',
-    'worldCollectionLevel6.json',
-];
 const levelCount = levelFiles.length;
 
 // Для примера, roundsCount можно получить из worldCollection (здесь захардкожено, но в реальном коде — из данных)
 let roundsCount = 10; // по умолчанию, будет обновляться при смене уровня
-
-/**
- * Получает roundsCount из файла worldCollectionLevelX.json
- * @param {string} fileName - имя файла уровня (например, 'worldCollectionLevel1.json')
- * @returns {Promise<number>} roundsCount
- */
-async function getRoundsCountFromLevelFile(fileName: string): Promise<number> {
-    try {
-        const response = await fetch(`/worldCollectionData/${fileName}`);
-        if (!response.ok) throw new Error('File not found');
-        const data = await response.json();
-        // roundsCount может быть либо отдельным полем, либо data.rounds.length
-        if (typeof data.roundsCount === 'number') return data.roundsCount;
-        if (Array.isArray(data.rounds)) return data.rounds.length;
-        throw new Error('roundsCount not found');
-    } catch (e) {
-        // По умолчанию 10, если ошибка
-        return 10;
-    }
-}
 
 export function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
@@ -102,7 +74,8 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     function handleLevelSelect(idx: number) {
         return async (e: MouseEvent) => {
             e.preventDefault();
-            roundsCount = await getRoundsCountFromLevelFile(levelFiles[idx]);
+            const collection = await readWorldCollection(levelFiles[idx]);
+            roundsCount = collection.roundsCount;
             updateRoundsMenu();
             levelBtn.textContent = `Level ${idx + 1}`;
         };
@@ -119,8 +92,6 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     }
 
     updateRoundsMenu();
-
-    // ...остальной код без изменений...
     elements.hintsWrapper.appendChild(elements.gameHintTranslate);
     elements.gameHintTranslate.id = 'game-hint_translate';
     elements.hintsWrapper.appendChild(elements.gameHintSound);
@@ -166,5 +137,5 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
         lineNumber.textContent = i.toString();
         elements.lineNumberBlock.appendChild(lineNumber);
     }
-    addWorldCards();
+    addWorldCards(levelFiles[levelIdx - 1]);
 }
