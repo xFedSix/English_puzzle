@@ -4,10 +4,12 @@ import { clearBlocks } from './clearBlocks';
 import { setLevel, getLevel, setRound } from './get&set';
 import { GamePageElements } from './gamePageElements';
 import { readWorldCollection, levelFiles } from './worldCollectionReader';
+import { showTranslateHint } from './showTranslateHint';
 
 const levelCount = levelFiles.length;
 
 export async function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
+    // Назначаем обработчик на кнопку game-hint_translate после инициализации elements
     const elements = { ...gamePageElements };
     parent.appendChild(elements.hintsWrapper);
     parent.appendChild(elements.wrapper);
@@ -117,6 +119,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
     await updateRoundsMenu();
     elements.hintsWrapper.appendChild(elements.gameHintTranslate);
     elements.gameHintTranslate.id = 'game-hint_translate';
+    elements.gameHintTranslate.onclick = showTranslateHint;
     elements.hintsWrapper.appendChild(elements.gameHintSound);
     elements.gameHintSound.id = 'game-hint_sound';
     elements.wrapper.id = 'game-page__wrapper';
