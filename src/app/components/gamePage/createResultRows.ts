@@ -10,6 +10,7 @@ export function createResultRows(count: number, div: HTMLElement) {
     if (!resultBlock) return;
     for (let i = 1; i <= count; i += 1) {
         const newRowDiv = div.cloneNode(true) as HTMLElement;
+        newRowDiv.style.display = '';
         newRowDiv.style.gridRow = `${i}`;
         newRowDiv.classList.add('sourceRow');
         newRowDiv.id = `row${i}`;

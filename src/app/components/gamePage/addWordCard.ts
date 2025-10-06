@@ -1,6 +1,17 @@
+import { initElements } from '../constants';
 import { verifySentence } from './verifySentence';
 import { enableContinueButton } from './nextBtnHandler';
 import { getRowNumber } from './get&set';
+
+function enableCheckButton() {
+    const { checkButton, resultBlock } = initElements();
+    const currentRow = resultBlock.querySelector(`#row${getRowNumber()}`);
+    if (currentRow && currentRow.children.length > 0) {
+        checkButton.disabled = false;
+    } else {
+        checkButton.disabled = true;
+    }
+}
 
 export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock: HTMLElement, fileName: string) {
     const wordCard = document.createElement('div');
@@ -25,6 +36,7 @@ export function addWordCard(word: string, sourceBlock: HTMLElement, resultBlock:
             }
             sourceBlock.appendChild(wordCard);
         }
+        enableCheckButton();
         if (await verifySentence(fileName)) {
             enableContinueButton(resultBlock);
         }

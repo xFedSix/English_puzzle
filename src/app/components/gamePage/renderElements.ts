@@ -7,13 +7,19 @@ import { readWorldCollection, levelFiles } from './worldCollectionReader';
 
 const levelCount = levelFiles.length;
 
-// Для примера, roundsCount можно получить из worldCollection (здесь захардкожено, но в реальном коде — из данных)
-let roundsCount = 10; // по умолчанию, будет обновляться при смене уровня
-
 export async function renderElements(gamePageElements: GamePageElements, parent: HTMLElement) {
     const elements = { ...gamePageElements };
     parent.appendChild(elements.hintsWrapper);
     parent.appendChild(elements.wrapper);
+    // Добавим скрытый шаблонный div для строк, чтобы его можно было клонировать через initElements
+    if (!document.getElementById('row-template-div')) {
+        const rowTemplateDiv = document.createElement('div');
+        rowTemplateDiv.id = 'row-template-div';
+        rowTemplateDiv.className = 'sourceRow';
+        rowTemplateDiv.style.display = 'none';
+        // Можно добавить базовую структуру, если нужно
+        elements.wrapper.appendChild(rowTemplateDiv);
+    }
     elements.wrapper.insertBefore(elements.hintsWrapper, elements.wrapper.firstChild);
     elements.hintsWrapper.id = 'game-hints';
     elements.hintsWrapper.appendChild(elements.gameLevel);
@@ -25,7 +31,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
     const levelBtn = document.createElement('button');
     levelBtn.className = 'btn btn-secondary dropdown-toggle';
     levelBtn.type = 'button';
-    levelBtn.id = 'dropdownLevelBtn';
+    levelBtn.id = 'dropdownLevelBtn'; // id для доступа через initElements
     levelBtn.setAttribute('data-bs-toggle', 'dropdown');
     levelBtn.setAttribute('aria-expanded', 'false');
     levelBtn.textContent = `Level ${levelIdx}`;
@@ -42,7 +48,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
     const roundsBtn = document.createElement('button');
     roundsBtn.className = 'btn btn-secondary dropdown-toggle';
     roundsBtn.type = 'button';
-    roundsBtn.id = 'dropdownRoundsBtn';
+    roundsBtn.id = 'dropdownRoundsBtn'; // id для доступа через initElements
     roundsBtn.setAttribute('data-bs-toggle', 'dropdown');
     roundsBtn.setAttribute('aria-expanded', 'false');
     const RoundIdx = 1; // Начальный раунд (может быть любым от 1 до roundsCount)
@@ -55,9 +61,10 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
     elements.gameLevel.appendChild(roundsDropdown);
 
     // --- Обновление меню раундов ---
-    function updateRoundsMenu() {
+    async function updateRoundsMenu() {
         roundsMenu.innerHTML = '';
-        for (let j = 0; j < roundsCount; j += 1) {
+        const { rounds } = await readWorldCollection(levelFiles[getLevel() - 1]);
+        for (let j = 0; j < rounds.length; j += 1) {
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.className = 'dropdown-item';
@@ -69,8 +76,8 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
                 setRound(j);
                 clearBlocks();
                 // Получаем количество слов для текущего уровня и раунда
-                const jsonData = await readWorldCollection(levelFiles[getLevel() - 1]);
-                const round = jsonData.rounds[j];
+                const { rounds: roundsInner } = await readWorldCollection(levelFiles[getLevel() - 1]);
+                const round = roundsInner[j];
                 const wordsCount = round.words.length;
                 createResultRows(wordsCount, elements.div);
                 await addWorldCards(levelFiles[getLevel() - 1]);
@@ -86,8 +93,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
             e.preventDefault();
             setLevel(idx + 1);
             const collection = await readWorldCollection(levelFiles[idx]);
-            roundsCount = collection.roundsCount;
-            updateRoundsMenu();
+            await updateRoundsMenu();
             levelBtn.textContent = `Level ${idx + 1}`;
             clearBlocks();
             // Получаем количество слов для первого раунда нового уровня
@@ -108,7 +114,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
         levelMenu.appendChild(li);
     }
 
-    updateRoundsMenu();
+    await updateRoundsMenu();
     elements.hintsWrapper.appendChild(elements.gameHintTranslate);
     elements.gameHintTranslate.id = 'game-hint_translate';
     elements.hintsWrapper.appendChild(elements.gameHintSound);

@@ -13,13 +13,17 @@ export async function addWorldCards(fileName: string) {
     const { textExample } = wordsArray[getIndex()];
     const words = textExample.split(' ');
     const shuffledWords = shuffleArray(words);
+    // Сбросить состояние кнопок
     nextButton.textContent = 'Continue';
+    nextButton.classList.remove('visible');
     nextButton.classList.add('hidden');
     nextButton.disabled = true;
     checkButton.textContent = 'Check';
+    checkButton.classList.remove('hidden');
     checkButton.classList.add('visible');
     checkButton.disabled = true;
     autoCompleteButton.textContent = 'Auto Complete';
+    autoCompleteButton.disabled = false;
 
     if (sourceBlock && resultBlock) {
         shuffledWords.forEach((word) => {
@@ -29,5 +33,5 @@ export async function addWorldCards(fileName: string) {
             addWordCard(word, sourceBlock, resultBlock, fileName);
         });
     }
-    autoCompleteBtn();
+    autoCompleteBtn(fileName);
 }
