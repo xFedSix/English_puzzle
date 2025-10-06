@@ -22,7 +22,7 @@ let roundsCount = 10; // по умолчанию, будет обновлять�
  */
 async function getRoundsCountFromLevelFile(fileName: string): Promise<number> {
     try {
-        const response = await fetch(`src/worldCollectionData/${fileName}`);
+        const response = await fetch(`/worldCollectionData/${fileName}`);
         if (!response.ok) throw new Error('File not found');
         const data = await response.json();
         // roundsCount может быть либо отдельным полем, либо data.rounds.length
@@ -43,7 +43,7 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     elements.hintsWrapper.id = 'game-hints';
     elements.hintsWrapper.appendChild(elements.gameLevel);
     elements.gameLevel.id = 'game-level__wrapper';
-
+    const levelIdx = 1; // Начальный уровень (может быть любым от 1 до levelCount)
     // --- Level dropdown ---
     const levelDropdown = document.createElement('div');
     levelDropdown.className = 'dropdown';
@@ -53,7 +53,7 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     levelBtn.id = 'dropdownLevelBtn';
     levelBtn.setAttribute('data-bs-toggle', 'dropdown');
     levelBtn.setAttribute('aria-expanded', 'false');
-    levelBtn.textContent = 'Level';
+    levelBtn.textContent = `Level ${levelIdx}`;
     levelDropdown.appendChild(levelBtn);
     const levelMenu = document.createElement('ul');
     levelMenu.className = 'dropdown-menu';
@@ -70,7 +70,8 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     roundsBtn.id = 'dropdownRoundsBtn';
     roundsBtn.setAttribute('data-bs-toggle', 'dropdown');
     roundsBtn.setAttribute('aria-expanded', 'false');
-    roundsBtn.textContent = 'Round';
+    const RoundIdx = 1; // Начальный раунд (может быть любым от 1 до roundsCount)
+    roundsBtn.textContent = `Round ${RoundIdx}`;
     roundsDropdown.appendChild(roundsBtn);
     const roundsMenu = document.createElement('ul');
     roundsMenu.className = 'dropdown-menu';
@@ -98,12 +99,12 @@ export function renderElements(gamePageElements: GamePageElements, parent: HTMLE
     }
 
     // --- Заполнение меню уровней ---
-    function handleLevelSelect(levelIdx: number) {
+    function handleLevelSelect(idx: number) {
         return async (e: MouseEvent) => {
             e.preventDefault();
-            roundsCount = await getRoundsCountFromLevelFile(levelFiles[levelIdx]);
+            roundsCount = await getRoundsCountFromLevelFile(levelFiles[idx]);
             updateRoundsMenu();
-            levelBtn.textContent = `Level ${levelIdx + 1}`;
+            levelBtn.textContent = `Level ${idx + 1}`;
         };
     }
     for (let i = 0; i < levelCount; i += 1) {

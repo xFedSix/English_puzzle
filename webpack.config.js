@@ -63,7 +63,7 @@ module.exports = ({ develop }) => ({
         }),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new CopyPlugin({
-            patterns: [{ from: 'src/worldCollectionData/files', to: 'files' }],
+            patterns: [{ from: 'src/worldCollectionData', to: 'worldCollectionData' }],
         }),
     ],
     ...devServer(develop),
