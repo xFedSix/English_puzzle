@@ -5,6 +5,8 @@ import { setLevel, getLevel, setRound } from './get&set';
 import { GamePageElements } from './gamePageElements';
 import { readWorldCollection, levelFiles } from './worldCollectionReader';
 import { showTranslateHint } from './showTranslateHint';
+import { setResultBlockBackground } from './setResultBlockBackground';
+import { playAudioExample } from './playAudioExample';
 
 const levelCount = levelFiles.length;
 
@@ -43,6 +45,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
     levelMenu.setAttribute('aria-labelledby', 'dropdownLevelBtn');
     levelDropdown.appendChild(levelMenu);
     elements.gameLevel.appendChild(levelDropdown);
+    // Удаляем преждевременный вызов setResultBlockBackground
 
     // --- Rounds dropdown ---
     const roundsDropdown = document.createElement('div');
@@ -77,6 +80,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
                 roundsBtn.textContent = `Round ${j + 1}`;
                 setRound(j);
                 clearBlocks();
+                await setResultBlockBackground();
                 // Получаем количество слов для текущего уровня и раунда
                 const { rounds: roundsInner } = await readWorldCollection(levelFiles[getLevel() - 1]);
                 const round = roundsInner[j];
@@ -98,6 +102,7 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
             await updateRoundsMenu();
             levelBtn.textContent = `Level ${idx + 1}`;
             clearBlocks();
+            await setResultBlockBackground();
             // Получаем количество слов для первого раунда нового уровня
             const round = collection.rounds[0];
             const wordsCount = round.words.length;
@@ -117,16 +122,21 @@ export async function renderElements(gamePageElements: GamePageElements, parent:
     }
 
     await updateRoundsMenu();
+    // setResultBlockBackground вызываем только после добавления resultBlock в DOM
     elements.hintsWrapper.appendChild(elements.gameHintTranslate);
     elements.gameHintTranslate.id = 'game-hint_translate';
     elements.gameHintTranslate.onclick = showTranslateHint;
     elements.hintsWrapper.appendChild(elements.gameHintSound);
     elements.gameHintSound.id = 'game-hint_sound';
+    elements.gameHintSound.onclick = async () => {
+        await playAudioExample();
+    };
     elements.wrapper.id = 'game-page__wrapper';
     elements.wrapper.appendChild(elements.lineNumberBlock);
     elements.lineNumberBlock.id = 'line-number-block';
     elements.wrapper.appendChild(elements.resultBlock);
     elements.resultBlock.id = 'result-block';
+    await setResultBlockBackground();
     elements.wrapper.appendChild(elements.sourceBlock);
     elements.sourceBlock.id = 'source-block';
     elements.wrapper.appendChild(elements.nextButton);
